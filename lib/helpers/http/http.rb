@@ -29,6 +29,23 @@ class HTTPHelper
     ret
   end
 
+  def self.post_multipart_data(url, data)
+    raise "No form data provided!" unless data
+    url = URI(url) unless url.class == URI::Generic
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    req = Net::HTTP::Post.new(url)
+    req.set_form data, 'multipart/form-data'
+
+    res = http.request(req)
+
+    ret = res.body
+    ret = JSON.parse(ret)
+
+    ret
+  end
+
   def self.put(url, data)
     raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic

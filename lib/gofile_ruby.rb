@@ -13,7 +13,21 @@ class GFClient
 
   def get_server
     server_url = "https://api.gofile.io/getServer"
-    HTTPHelper.get(server_url, parse)
+    HTTPHelper.get(server_url)
+  end
+
+  def upload_file(file:, folder_id: nil)
+    raise "Guests cannot specify folder ID!" if @isGuest && folder_id
+
+    best_server = get_server()["data"]["server"]
+    upload_url = "https://#{best_server}.gofile.io/uploadFile"
+
+    body = [["file", file], ["folderId", folder_id], ["token", @token]]
+
+    ret = HTTPHelper.post_multipart_data(upload_url, body)
+    puts ret
+
+    ret
   end
 
   def create_folder(parent_id:nil, folder_name:)
