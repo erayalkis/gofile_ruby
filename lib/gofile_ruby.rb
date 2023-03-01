@@ -67,6 +67,40 @@ class GFClient
     ret
   end
 
+  # Copies one or multiple contents to destination folder
+  # Destination ID: String
+  # Contents ID: String (String of comma separated ID's, Eg. "id1,id2,id3")
+  def copy_content(destination_id:, contents_id:)
+    copy_url = "https://api.gofile.io/copyContent"
+
+    body = {
+      "contentsId": contents_id,
+      "folderIdDest": destination_id,
+      "token": @token
+    }
+
+    ret = HTTPHelper.put(copy_url, body)
+    puts ret
+
+    ret
+  end
+
+  # Delete one or multiple contents
+  # Contents Id: String (String of comma separated ID's, Eg. "id1,id2,id3")
+  def delete_content(contents_id:)
+    delete_url = "https://api.gofile.io/deleteContent"
+
+    body = {
+      "contentsId": contents_id,
+      "token": @token
+    }
+
+    ret = HTTPHelper.delete(delete_url, body)
+    puts ret
+
+    ret
+  end
+
   private
 
   # Will return account details

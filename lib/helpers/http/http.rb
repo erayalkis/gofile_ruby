@@ -3,18 +3,20 @@ require 'net/http'
 require 'json'
 
 class HTTPHelper
-  def self.get(url, parse)
+  def self.get(url)
+    puts url
+
     url = URI(url) unless url.class == URI::Generic
     res = Net::HTTP.get_response(url)
     
     puts res.code
     ret = res.body
-    ret = JSON.parse(ret) if parse
+    ret = JSON.parse(ret)
 
     ret
   end
 
-  def self.post_form(url, data, parse)
+  def self.post_form(url, data)
     raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic
 
@@ -22,12 +24,12 @@ class HTTPHelper
     
     puts res.code
     ret = res.body
-    ret = JSON.parse(ret) if parse
+    ret = JSON.parse(ret)
 
     ret
   end
 
-  def self.put(url, data, parse)
+  def self.put(url, data)
     raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic
 
@@ -39,7 +41,24 @@ class HTTPHelper
     res = http.request(req)
 
     ret = res.body
-    ret = JSON.parse(ret) if parse
+    ret = JSON.parse(ret)
+
+    ret
+  end
+
+  def self.delete(url, data)
+    raise "No form data provided!" unless data
+    url = URI(url) unless url.class == URI::Generic
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    req = Net::HTTP::Delete.new(url, { 'Content-Type' => 'application/x-www-form-urlencoded' })
+    req.body = URI::encode_www_form(data)
+
+    res = http.request(req)
+
+    ret = res.body
+    ret = JSON.parse(ret)
 
     ret
   end
