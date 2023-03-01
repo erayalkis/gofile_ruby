@@ -5,8 +5,8 @@ class GFClient
     puts "This is a test message!"
   end
 
-  def get_server
+  def get_server(parse:false)
     target_url = "https://api.gofile.io/getServer"
-    HTTPHelper.get(target_url)
+    HTTPHelper.get(target_url, parse:parse)
   end
 end
