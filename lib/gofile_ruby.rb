@@ -6,6 +6,9 @@ class GFClient
     @token = token
     @isGuest = guest
     @accDetails = nil
+    # Gets set after a guest account uploads their first file
+    # Is used only when uploading files as a guest
+    @guestUploadDestination = nil
 
     @isGuest = false if @token
     test_token_validity unless @isGuest
@@ -16,18 +19,41 @@ class GFClient
     HTTPHelper.get(server_url)
   end
 
+  # Uploads a file to the given destination folder
+  # If using guest mode, you cannot specify a folder ID when uploading your first file
+  # To get around this issue, gofile_ruby sets the new folder ID automatically for you upon upload
   def upload_file(file:, folder_id: nil)
-    raise "Guests cannot specify folder ID!" if @isGuest && folder_id
+    raise "Guests cannot specify folder ID before their first upload!" if folder_id && @guestUploadDestination.nil?
 
     best_server = get_server()["data"]["server"]
     upload_url = "https://#{best_server}.gofile.io/uploadFile"
 
     body = [["file", file]]
-    body << ["folderId", folder_id] if folder_id && !@isGuest
     body << ["token", @token] if !@isGuest
 
+    if folder_id && !@isGuest
+      body << ["folderId", folder_id]
+    elsif @guestUploadDestination && !folder_id
+      body << ["folderId", @guestUploadDestination]
+    end
+  
     ret = HTTPHelper.post_multipart_data(upload_url, body)
-    puts ret
+  
+    # If user is a guest,
+    if @isGuest
+      puts "hi"
+      # After uploading, take the newly returned guest token
+      guest_token = ret["data"]["guestToken"]
+      # And the newly created root folder,
+      new_root_folder = ret["data"]["parentFolder"]
+
+      @isGuest = false
+      @guestUploadDestination = new_root_folder
+      @token = guest_token
+      puts "Set new params: Guest token: #{@token} | File destination: #{@guestUploadDestination}"
+    # And check the tokens validity, saving the users details into @accDetails afterwards
+      test_token_validity
+    end
 
     ret
   end
