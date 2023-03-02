@@ -4,12 +4,9 @@ require 'json'
 
 class HTTPHelper
   def self.get(url)
-    puts url
-
     url = URI(url) unless url.class == URI::Generic
     res = Net::HTTP.get_response(url)
     
-    puts res.code
     ret = res.body
     ret = JSON.parse(ret)
 
@@ -22,7 +19,6 @@ class HTTPHelper
 
     res = Net::HTTP.post_form(url, data)
     
-    puts res.code
     ret = res.body
     ret = JSON.parse(ret)
 

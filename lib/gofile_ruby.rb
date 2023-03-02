@@ -10,18 +10,31 @@ class GFClient
     # Is used only when uploading files as a guest
     @guestUploadDestination = nil
 
+    # Automatically set guest mode if user doesn't provide any input
+    @isGuest = true if !@token && !@isGuest
+    # If user tries inputting a token while also enabling guest mode, switch guest mode off
     @isGuest = false if @token
     test_token_validity unless @isGuest
   end
 
+  # Retreives the best available server for upload
+  # Example response:
+  # {
+  #   "status": "ok",
+  #   "data": {
+  #     "server": "store1"
+  #   }
+  # }
   def get_server
     server_url = "https://api.gofile.io/getServer"
     HTTPHelper.get(server_url)
   end
 
   # Uploads a file to the given destination folder
-  # If using guest mode, you cannot specify a folder ID when uploading your first file
-  # To get around this issue, gofile_ruby sets the new folder ID automatically for you upon upload
+  # If using guest mode, you cannot specify a folder ID when uploading your first file.
+  # If you're uploading multiple files, you have to use the parent ID along with the token from the response object in your subsequent uploads.
+  # To get around this issue, gofile_ruby saves the newly returned token and parent ID after your first upload.
+  # This means that you can call the #upload_file method multiple times without having to deal with authentication.
   def upload_file(file:, folder_id: nil)
     raise "Guests cannot specify folder ID before their first upload!" if folder_id && @guestUploadDestination.nil?
 
@@ -43,8 +56,15 @@ class GFClient
     ret
   end
 
+  # Creates a folder with the given folder name and parent ID (if provided).
+  # When using guest mode, you cannot call this method until you've uploaded a file first.
+  # Response example:
+  # {
+    # "status": "ok",
+    # "data": {}
+  # }
   def create_folder(parent_id:nil, folder_name:)
-    raise "Guest accounts cannot create folders! Did you mean to upload a file instead?" if @isGuest
+    raise "Cannot create folders in guest mode! Did you mean to upload a file instead?" if @isGuest
     post_folder_url = "https://api.gofile.io/createFolder"
     
     parent_id = @accDetails["data"]["rootFolder"] unless parent_id
@@ -60,8 +80,44 @@ class GFClient
     ret
   end
 
+  # *ONLY PREMIUM ACCOUNTS CAN USE THIS METHOD!*
   # Gets the children of a specific folder
   # Defaults to root folder if parent is not provided
+  # Response example:
+  # {
+  #   "status": "ok",
+  #   "data": {
+  #     "isOwner": true,
+  #     "id": "3dbc2f87-4c1e-4a81-badc-af004e61a5b4",
+  #     "type": "folder",
+  #     "name": "Z19n9a",
+  #     "parentFolder": "3241d27a-f7e1-4158-bc75-73d057eff5fa",
+  #     "code": "Z19n9a",
+  #     "createTime": 1648229689,
+  #     "public": true,
+  #     "childs": [
+  #       "4991e6d7-5217-46ae-af3d-c9174adae924"
+  #     ],
+  #     "totalDownloadCount": 0,
+  #     "totalSize": 9840497,
+  #     "contents": {
+  #       "4991e6d7-5217-46ae-af3d-c9174adae924": {
+  #         "id": "4991e6d7-5217-46ae-af3d-c9174adae924",
+  #         "type": "file",
+  #         "name": "example.mp4",
+  #         "parentFolder": "3dbc2f87-4c1e-4a81-badc-af004e61a5b4",
+  #         "createTime": 1648229689,
+  #         "size": 9840497,
+  #         "downloadCount": 0,
+  #         "md5": "10c918b1d01aea85864ee65d9e0c2305",
+  #         "mimetype": "video/mp4",
+  #         "serverChoosen": "store4",
+  #         "directLink": "https://store4.gofile.io/download/direct/4991e6d7-5217-46ae-af3d-c9174adae924/example.mp4",
+  #         "link": "https://store4.gofile.io/download/4991e6d7-5217-46ae-af3d-c9174adae924/example.mp4"
+  #       }
+  #     }
+  #   }
+  # }
   def get_children(parent:nil)
     raise "Guests cannot use the #get_children method!" if @isGuest
     parent = @accDetails["data"]["rootFolder"] if !parent
@@ -79,6 +135,11 @@ class GFClient
   # description: String
   # expire: Unix Timestamp
   # tags: String (String of comma separated tags, Eg. "tag1,tag2,tag3")
+  # Response example:
+  # {
+    # "status": "ok",
+    # "data": {}
+  # }  
   def set_folder_option(folder_id:, option:, value:)
     options_url = "https://api.gofile.io/setFolderOption"
 
@@ -94,9 +155,14 @@ class GFClient
     ret
   end
 
+  # *ONLY PREMIUM ACCOUNTS CAN USE THIS METHOD!*
   # Copies one or multiple contents to destination folder
   # Destination ID: String
   # Contents ID: String (String of comma separated ID's, Eg. "id1,id2,id3")
+  # {
+    # "status": "ok",
+    # "data": {}
+  # }
   def copy_content(destination_id:, contents_id:)
     copy_url = "https://api.gofile.io/copyContent"
 
@@ -114,6 +180,10 @@ class GFClient
 
   # Delete one or multiple contents
   # Contents Id: String (String of comma separated ID's, Eg. "id1,id2,id3")
+  # {
+    # "status": "ok",
+    # "data": {}
+  # }
   def delete_content(contents_id:)
     delete_url = "https://api.gofile.io/deleteContent"
 
