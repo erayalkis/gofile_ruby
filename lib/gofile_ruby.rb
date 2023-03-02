@@ -22,7 +22,9 @@ class GFClient
     best_server = get_server()["data"]["server"]
     upload_url = "https://#{best_server}.gofile.io/uploadFile"
 
-    body = [["file", file], ["folderId", folder_id], ["token", @token]]
+    body = [["file", file]]
+    body << ["folderId", folder_id] if folder_id && !@isGuest
+    body << ["token", @token] if !@isGuest
 
     ret = HTTPHelper.post_multipart_data(upload_url, body)
     puts ret
