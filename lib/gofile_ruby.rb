@@ -215,6 +215,8 @@ class GFClient
   # @param [String] destination_id The ID for the folder where the contents will be copied to.
   # @param [String] contents_id: A string of comma separated content ID's. ("id1,id2,id3")
   # @return [Hash] response The response object.
+  # @note This method is premium only! You will not be able to use it unless you have a premium account!
+  # @todo This method will be tested at a later time due to it being a premium-only endpoint.
   def copy_content(destination_id:, contents_id:)
     copy_url = "https://api.gofile.io/copyContent"
 

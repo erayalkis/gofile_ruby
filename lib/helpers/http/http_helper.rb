@@ -2,7 +2,12 @@ require 'uri'
 require 'net/http'
 require 'json'
 
+# A module for simplifying HTTP requests
 module HTTPHelper
+  # Makes a GET request to the specified URL.
+  #
+  # If the given URL is a string, it gets converted to a URI.
+  # @param [String, URI] url The URL for the request.
   def self.get(url)
     url = URI(url) unless url.class == URI::Generic
     res = Net::HTTP.get_response(url)
@@ -13,6 +18,11 @@ module HTTPHelper
     ret
   end
 
+  # POSTs the data as a form to the specified URL.
+  #
+  # If the given URL is a string, it gets converted to a URI.
+  # @param [String, URI] url The URL for the request.
+  # @param [Hash] data The data for the post request.
   def self.post_form(url, data)
     raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic
@@ -25,6 +35,11 @@ module HTTPHelper
     ret
   end
 
+  # Takes an array of arrays and POSTs them as multipart form data to the specified URL.
+  #
+  # If the given URL is a string, it gets converted to a URI.
+  # @param [String, URI] url The URL for the request.
+  # @param [Array<Array<String, T>>] data The data for the post request.
   def self.post_multipart_data(url, data)
     raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic
@@ -42,6 +57,11 @@ module HTTPHelper
     ret
   end
 
+  # Makes a PUT request to the specified URL.
+  #
+  # If the given URL is a string, it gets converted to a URI.
+  # @param [String, URI] url The URL for the request.
+  # @param [Array<Array<String, T>>] data The data for the post request.
   def self.put(url, data)
     raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic
@@ -59,6 +79,11 @@ module HTTPHelper
     ret
   end
 
+  # Makes a DELETE request to the specified URL.
+  #
+  # If the given URL is a string, it gets converted to a URI.
+  # @param [String, URI] url The URL for the request.
+  # @param [Array<Array<String, T>>] data The data for the post request.
   def self.delete(url, data)
     raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic

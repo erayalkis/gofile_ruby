@@ -482,6 +482,22 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>This method will be tested at a later time due to it being a premium-only endpoint.</p>
+</div>
+  </div>
+
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>This method is premium only! You will not be able to use it unless you have a premium account!</p>
+</div>
+  </div>
+
+
 <p>Copies one or multiple contents to destination folder.</p>
 
 <p>Destination ID: String</p>
@@ -570,8 +586,7 @@
 229
 230
 231
-232
-233</pre>
+232</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 220</span>
@@ -585,8 +600,7 @@
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>token</span><span class='label_end'>&quot;:</span> <span class='ivar'>@token</span>
   <span class='rbrace'>}</span>
 
-  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (class)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_put'><span class='object_link'><a href="HTTPHelper.html#put-class_method" title="HTTPHelper.put (method)">put</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_copy_url'>copy_url</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ret'>ret</span>
+  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (module)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_put'><span class='object_link'><a href="HTTPHelper.html#put-class_method" title="HTTPHelper.put (method)">put</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_copy_url'>copy_url</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_ret'>ret</span>
 <span class='kw'>end</span></pre>
@@ -701,8 +715,7 @@
 115
 116
 117
-118
-119</pre>
+118</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 104</span>
@@ -718,9 +731,8 @@
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>token</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='ivar'>@token</span>
   <span class='rbrace'>}</span>
 
-  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (class)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_put'><span class='object_link'><a href="HTTPHelper.html#put-class_method" title="HTTPHelper.put (method)">put</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_post_folder_url'>post_folder_url</span><span class='comma'>,</span> <span class='id identifier rubyid_folder_data'>folder_data</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (module)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_put'><span class='object_link'><a href="HTTPHelper.html#put-class_method" title="HTTPHelper.put (method)">put</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_post_folder_url'>post_folder_url</span><span class='comma'>,</span> <span class='id identifier rubyid_folder_data'>folder_data</span><span class='rparen'>)</span>
   
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ret'>ret</span>
   <span class='id identifier rubyid_ret'>ret</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -798,6 +810,7 @@
       <pre class="lines">
 
 
+241
 242
 243
 244
@@ -808,12 +821,10 @@
 249
 250
 251
-252
-253
-254</pre>
+252</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 242</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 241</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_content'>delete_content</span><span class='lparen'>(</span><span class='label'>contents_id:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_delete_url'>delete_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api.gofile.io/deleteContent</span><span class='tstring_end'>&quot;</span></span>
@@ -823,8 +834,7 @@
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>token</span><span class='label_end'>&quot;:</span> <span class='ivar'>@token</span>
   <span class='rbrace'>}</span>
 
-  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (class)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_delete'><span class='object_link'><a href="HTTPHelper.html#delete-class_method" title="HTTPHelper.delete (method)">delete</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_delete_url'>delete_url</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ret'>ret</span>
+  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (module)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_delete'><span class='object_link'><a href="HTTPHelper.html#delete-class_method" title="HTTPHelper.delete (method)">delete</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_delete_url'>delete_url</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_ret'>ret</span>
 <span class='kw'>end</span></pre>
@@ -892,20 +902,20 @@
       <pre class="lines">
 
 
+269
+270
 271
 272
 273
 274
-275
-276
-277</pre>
+275</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 271</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 269</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_account_details'>get_account_details</span>
   <span class='id identifier rubyid_account_details_url'>account_details_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api.gofile.io/getAccountDetails?token=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@token</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_details'>details</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (class)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get'><span class='object_link'><a href="HTTPHelper.html#get-class_method" title="HTTPHelper.get (method)">get</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_account_details_url'>account_details_url</span><span class='rparen'>)</span>   
+  <span class='id identifier rubyid_details'>details</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (module)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get'><span class='object_link'><a href="HTTPHelper.html#get-class_method" title="HTTPHelper.get (method)">get</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_account_details_url'>account_details_url</span><span class='rparen'>)</span>   
   <span class='ivar'>@accDetails</span> <span class='op'>=</span> <span class='id identifier rubyid_details'>details</span>
 
   <span class='id identifier rubyid_details'>details</span>
@@ -1035,6 +1045,7 @@
       <pre class="lines">
 
 
+161
 162
 163
 164
@@ -1042,18 +1053,17 @@
 166
 167
 168
-169
-170</pre>
+169</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 161</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_children'>get_children</span><span class='lparen'>(</span><span class='label'>parent_id:</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Guests cannot use the #get_children method!</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@isGuest</span>
   <span class='id identifier rubyid_parent'>parent</span> <span class='op'>=</span> <span class='ivar'>@accDetails</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>data</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rootFolder</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_parent'>parent</span>
 
   <span class='id identifier rubyid_content_url'>content_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api.gofile.io/getContent?contentId=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_parent'>parent</span><span class='embexpr_end'>}</span><span class='tstring_content'>&amp;token=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@token</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (class)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get'><span class='object_link'><a href="HTTPHelper.html#get-class_method" title="HTTPHelper.get (method)">get</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_content_url'>content_url</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (module)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get'><span class='object_link'><a href="HTTPHelper.html#get-class_method" title="HTTPHelper.get (method)">get</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_content_url'>content_url</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_ret'>ret</span>
 <span class='kw'>end</span></pre>
@@ -1124,7 +1134,7 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_server'>get_server</span>
   <span class='id identifier rubyid_server_url'>server_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api.gofile.io/getServer</span><span class='tstring_end'>&quot;</span></span>
-  <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (class)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get'><span class='object_link'><a href="HTTPHelper.html#get-class_method" title="HTTPHelper.get (method)">get</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_server_url'>server_url</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (module)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get'><span class='object_link'><a href="HTTPHelper.html#get-class_method" title="HTTPHelper.get (method)">get</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_server_url'>server_url</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1245,6 +1255,7 @@
       <pre class="lines">
 
 
+192
 193
 194
 195
@@ -1256,12 +1267,10 @@
 201
 202
 203
-204
-205
-206</pre>
+204</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 193</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 192</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_folder_option'>set_folder_option</span><span class='lparen'>(</span><span class='label'>folder_id:</span><span class='comma'>,</span> <span class='label'>option:</span><span class='comma'>,</span> <span class='label'>value:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options_url'>options_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api.gofile.io/setFolderOption</span><span class='tstring_end'>&quot;</span></span>
@@ -1272,8 +1281,7 @@
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folderId</span><span class='label_end'>&quot;:</span> <span class='id identifier rubyid_folder_id'>folder_id</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>token</span><span class='label_end'>&quot;:</span> <span class='ivar'>@token</span>
   <span class='rbrace'>}</span>
-  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (class)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_put'><span class='object_link'><a href="HTTPHelper.html#put-class_method" title="HTTPHelper.put (method)">put</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_options_url'>options_url</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_ret'>ret</span> 
+  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (module)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_put'><span class='object_link'><a href="HTTPHelper.html#put-class_method" title="HTTPHelper.put (method)">put</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_options_url'>options_url</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_ret'>ret</span>
 <span class='kw'>end</span></pre>
@@ -1431,7 +1439,7 @@
     <span class='id identifier rubyid_body'>body</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folderId</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@guestUploadDestination</span><span class='rbracket'>]</span>
   <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (class)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_post_multipart_data'><span class='object_link'><a href="HTTPHelper.html#post_multipart_data-class_method" title="HTTPHelper.post_multipart_data (method)">post_multipart_data</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_upload_url'>upload_url</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_ret'>ret</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (module)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_post_multipart_data'><span class='object_link'><a href="HTTPHelper.html#post_multipart_data-class_method" title="HTTPHelper.post_multipart_data (method)">post_multipart_data</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_upload_url'>upload_url</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_save_guest_acc_details'>save_guest_acc_details</span><span class='lparen'>(</span><span class='id identifier rubyid_ret'>ret</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@isGuest</span>
 
   <span class='id identifier rubyid_ret'>ret</span>
@@ -1446,7 +1454,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Mar  3 04:07:49 2023 by
+  Generated on Fri Mar  3 04:48:15 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.2.1).
 </div>
