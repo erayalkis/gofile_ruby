@@ -1,9 +1,17 @@
-require './lib/helpers/http/http.rb'
+require './lib/helpers/http/http_helper.rb'
 
+# A wrapper for the GoFile API, containing methods for each available endpoint.
+#
+# @see https://gofile.io/api
 class GFClient
 
+  # Creates a new instance of the GFClient class.
+  # @param [String] token The API token for your GoFile account
+  # @param [Boolean] guest A boolean value indicating whether or not guest mode should be enabled
   def initialize(token:nil, guest:false)
     @token = token
+    # TODO: Change the name of this parameter! @isGuest is used to check if the user has an account token, not to be confused with *guest accounts*, which have API tokens.
+    # A GFClient in guest mode (where no token is provided) will set @isGuest to false after acquiring the API key from a newly created guest account, after the user uploads their first file in guest mode.
     @isGuest = guest
     @accDetails = nil
     # Gets set after a guest account uploads their first file
@@ -14,27 +22,48 @@ class GFClient
     @isGuest = true if !@token && !@isGuest
     # If user tries inputting a token while also enabling guest mode, switch guest mode off
     @isGuest = false if @token
-    test_token_validity unless @isGuest
+    get_account_details unless @isGuest
   end
 
-  # Retreives the best available server for upload
+  # Retreives the best available server for uploading files
+  #
   # Example response:
-  # {
-  #   "status": "ok",
-  #   "data": {
-  #     "server": "store1"
-  #   }
-  # }
+  #
+  #  "status": "ok",
+  #  "data": {
+  #    "server": "store1"
+  #  }
+  #
+  # @return [Hash] response The response object.
   def get_server
     server_url = "https://api.gofile.io/getServer"
     HTTPHelper.get(server_url)
   end
 
-  # Uploads a file to the given destination folder
+  # Uploads a file to the given destination folder.
+  #
   # If using guest mode, you cannot specify a folder ID when uploading your first file.
+  #
   # If you're uploading multiple files, you have to use the parent ID along with the token from the response object in your subsequent uploads.
+  #
   # To get around this issue, gofile_ruby saves the newly returned token and parent ID after your first upload.
+  #
   # This means that you can call the #upload_file method multiple times without having to deal with authentication.
+  #
+  # Example response:
+  #  "status": "ok",
+  #   "data": {
+  #     "guestToken": "a939kv5b43c03192imatoken2949"
+  #     "downloadPage": "https://gofile.io/d/Z19n9a",
+  #     "code": "Z19n9a",
+  #     "parentFolder": "3dbc2f87-4c1e-4a81-badc-af004e61a5b4",
+  #     "fileId": "4991e6d7-5217-46ae-af3d-c9174adae924",
+  #     "fileName": "example.mp4",
+  #     "md5": "10c918b1d01aea85864ee65d9e0c2305"
+  #   }
+  # @param [File] file The file that will be uploaded to GoFile
+  # @param [String] folder_id The ID for the parent folder. Will default to the root folder if none is provided.
+  # @return [Hash] response The response object.
   def upload_file(file:, folder_id: nil)
     raise "Guests cannot specify folder ID before their first upload!" if folder_id && @guestUploadDestination.nil?
 
@@ -44,8 +73,11 @@ class GFClient
     body = [["file", file]]
     body << ["token", @token] if !@isGuest
 
+    # If user inputs a folder_id while they aren't in guest mode,
     if folder_id && !@isGuest
+      # add the ID to the body of the request
       body << ["folderId", folder_id]
+    # If the user is on a guest account, and a folder id hasn't been provided, use the folder ID returned from the first file upload
     elsif @guestUploadDestination && !folder_id
       body << ["folderId", @guestUploadDestination]
     end
@@ -56,13 +88,19 @@ class GFClient
     ret
   end
 
-  # Creates a folder with the given folder name and parent ID (if provided).
-  # When using guest mode, you cannot call this method until you've uploaded a file first.
-  # Response example:
-  # {
-    # "status": "ok",
-    # "data": {}
-  # }
+  # Creates a folder with the given folder name and parent ID.
+  # If a parent ID is not provided, it default to the root folder.
+  #
+  # When using guest mode, you cannot call this method until you've uploaded a file first, as the guest token and root folder ID won't be available.
+  #
+  # Example response:
+  #   "status": "ok",
+  #   "data": {
+  #
+  #   }
+  # @param [String] parent_id The ID of the parent folder
+  # @param [String] folder_name The name of the folder that will be created
+  # @return [Hash] response The response object.
   def create_folder(parent_id:nil, folder_name:)
     raise "Cannot create folders in guest mode! Did you mean to upload a file instead?" if @isGuest
     post_folder_url = "https://api.gofile.io/createFolder"
@@ -80,11 +118,11 @@ class GFClient
     ret
   end
 
-  # *ONLY PREMIUM ACCOUNTS CAN USE THIS METHOD!*
-  # Gets the children of a specific folder
-  # Defaults to root folder if parent is not provided
+  # Gets the children of a specific folder.
+  #
+  # Defaults to root folder if a parent ID is not provided.
+  #
   # Response example:
-  # {
   #   "status": "ok",
   #   "data": {
   #     "isOwner": true,
@@ -117,8 +155,11 @@ class GFClient
   #       }
   #     }
   #   }
-  # }
-  def get_children(parent:nil)
+  # @param [String] parent_id The ID of the parent folder.
+  # @return [Hash] response The response object.
+  # @note This method is premium only! You will not be able to use it unless you have a premium account!
+  # @todo This method will be tested at a later time due to it being a premium-only endpoint.
+  def get_children(parent_id:nil)
     raise "Guests cannot use the #get_children method!" if @isGuest
     parent = @accDetails["data"]["rootFolder"] if !parent
 
@@ -128,18 +169,27 @@ class GFClient
     ret
   end
 
-  # Sets the options for a specific folder
-  # Takes an option string and a matching value:
+  # Sets the options for a specific folder.
+  #
+  # The expected option and value types are listed below.
+  #
   # public: Boolean
+  #
   # password: String
+  #
   # description: String
+  #
   # expire: Unix Timestamp
+  #
   # tags: String (String of comma separated tags, Eg. "tag1,tag2,tag3")
+  #
   # Response example:
-  # {
-    # "status": "ok",
-    # "data": {}
-  # }  
+  #   "status": "ok",
+  #   "data": {}
+  # @param [String] folder_id The ID of the target folder.
+  # @param [String] option The option that you wish to set. Can be "public", "password", "description", "expire" or "tags"
+  # @param [String] value The matching value for the option parameter
+  # @return [Hash] response The response object.
   def set_folder_option(folder_id:, option:, value:)
     options_url = "https://api.gofile.io/setFolderOption"
 
@@ -155,14 +205,18 @@ class GFClient
     ret
   end
 
-  # *ONLY PREMIUM ACCOUNTS CAN USE THIS METHOD!*
-  # Copies one or multiple contents to destination folder
+  # Copies one or multiple contents to destination folder.
+  #
   # Destination ID: String
-  # Contents ID: String (String of comma separated ID's, Eg. "id1,id2,id3")
-  # {
-    # "status": "ok",
-    # "data": {}
-  # }
+  #
+  # Contents ID: String A string of comma separated content ID's. ("id1,id2,id3")
+  # Response example:
+  #
+  #   "status": "ok",
+  #   "data": {}
+  # @param [String] destination_id The ID for the folder where the contents will be copied to.
+  # @param [String] contents_id: A string of comma separated content ID's. ("id1,id2,id3")
+  # @return [Hash] response The response object.
   def copy_content(destination_id:, contents_id:)
     copy_url = "https://api.gofile.io/copyContent"
 
@@ -178,12 +232,13 @@ class GFClient
     ret
   end
 
-  # Delete one or multiple contents
-  # Contents Id: String (String of comma separated ID's, Eg. "id1,id2,id3")
-  # {
-    # "status": "ok",
-    # "data": {}
-  # }
+  # Delete one or multiple contents.
+  #
+  # Response example:
+  #   "status": "ok",
+  #   "data": {}
+  # @param [String] contents_id A string of comma separated content ID's. ("id1,id2,id3")
+  # @return [Hash] response The response object.
   def delete_content(contents_id:)
     delete_url = "https://api.gofile.io/deleteContent"
 
@@ -198,11 +253,9 @@ class GFClient
     ret
   end
 
-  private
-
-  # Will return account details
-  # Example:
-  # {
+  # Will return the details of the current account.
+  #
+  # Response example:
   #   "status": "ok",
   #   "data": {
   #     "token": "ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM",
@@ -214,13 +267,16 @@ class GFClient
   #     "totalSize": 67653500,
   #     "totalDownloadCount": 1
   #   }
-  # }
-  def test_token_validity
+  # @return [Hash] response The response object.
+  def get_account_details
     account_details_url = "https://api.gofile.io/getAccountDetails?token=#{@token}"
     details = HTTPHelper.get(account_details_url)   
-    
     @accDetails = details
+
+    details
   end
+
+  private
 
   # Takes the response object from a upload and saves the new guest accounts details for further use
   def save_guest_acc_details(uploadResponse)
@@ -232,8 +288,7 @@ class GFClient
     @isGuest = false
     @guestUploadDestination = new_root_folder
     @token = guest_token
-    puts "Set new params: Guest token: #{@token} | File destination: #{@guestUploadDestination}"
     # And check the tokens validity, saving the users details into @accDetails afterwards
-    test_token_validity
+    get_account_details
   end
 end

@@ -1,2 +1,3 @@
-# Yes, it's a script for a single line of a ruby command
+# Yes, it's a script for a single line of a command
+# Yes, I'm lazy
 ruby devtest/test.rb
