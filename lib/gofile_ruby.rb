@@ -114,7 +114,6 @@ class GFClient
 
     ret = HTTPHelper.put(post_folder_url, folder_data)
     
-    puts ret
     ret
   end
 
@@ -200,7 +199,6 @@ class GFClient
       "token": @token
     }
     ret = HTTPHelper.put(options_url, body)
-    puts ret 
 
     ret
   end
@@ -227,7 +225,6 @@ class GFClient
     }
 
     ret = HTTPHelper.put(copy_url, body)
-    puts ret
 
     ret
   end
@@ -248,7 +245,6 @@ class GFClient
     }
 
     ret = HTTPHelper.delete(delete_url, body)
-    puts ret
 
     ret
   end
