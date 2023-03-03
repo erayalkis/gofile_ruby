@@ -104,8 +104,6 @@
     
 <p>A wrapper for the GoFile API, containing methods for each available endpoint.</p>
 
-<p>You can check the link below for further details:</p>
-
 
   </div>
 </div>
@@ -137,7 +135,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#copy_content-instance_method" title="#copy_content (instance method)">#<strong>copy_content</strong>(destination_id:, contents_id:)  &#x21d2; Object </a>
+      <a href="#copy_content-instance_method" title="#copy_content (instance method)">#<strong>copy_content</strong>(destination_id:, contents_id:)  &#x21d2; Hash </a>
     
 
     
@@ -152,7 +150,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>}.</p>
+<p>Copies one or multiple contents to destination folder.</p>
 </div></span>
   
 </li>
@@ -161,7 +159,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_folder-instance_method" title="#create_folder (instance method)">#<strong>create_folder</strong>(parent_id: nil, folder_name:)  &#x21d2; Object </a>
+      <a href="#create_folder-instance_method" title="#create_folder (instance method)">#<strong>create_folder</strong>(parent_id: nil, folder_name:)  &#x21d2; Hash </a>
     
 
     
@@ -176,7 +174,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>}.</p>
+<p>Creates a folder with the given folder name and parent ID.</p>
 </div></span>
   
 </li>
@@ -185,7 +183,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#delete_content-instance_method" title="#delete_content (instance method)">#<strong>delete_content</strong>(contents_id:)  &#x21d2; Object </a>
+      <a href="#delete_content-instance_method" title="#delete_content (instance method)">#<strong>delete_content</strong>(contents_id:)  &#x21d2; Hash </a>
     
 
     
@@ -200,7 +198,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>}.</p>
+<p>Delete one or multiple contents.</p>
 </div></span>
   
 </li>
@@ -209,7 +207,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_children-instance_method" title="#get_children (instance method)">#<strong>get_children</strong>(parent: nil)  &#x21d2; Object </a>
+      <a href="#get_account_details-instance_method" title="#get_account_details (instance method)">#<strong>get_account_details</strong>  &#x21d2; Hash </a>
     
 
     
@@ -224,7 +222,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>ONLY PREMIUM ACCOUNTS CAN USE THIS METHOD!.</p>
+<p>Will return the details of the current account.</p>
 </div></span>
   
 </li>
@@ -233,7 +231,31 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_server-instance_method" title="#get_server (instance method)">#<strong>get_server</strong>  &#x21d2; Object </a>
+      <a href="#get_children-instance_method" title="#get_children (instance method)">#<strong>get_children</strong>(parent_id: nil)  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Gets the children of a specific folder.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_server-instance_method" title="#get_server (instance method)">#<strong>get_server</strong>  &#x21d2; Hash </a>
     
 
     
@@ -274,7 +296,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>A new instance of GFClient.</p>
+<p>Creates a new instance of the GFClient class.</p>
 </div></span>
   
 </li>
@@ -283,7 +305,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#set_folder_option-instance_method" title="#set_folder_option (instance method)">#<strong>set_folder_option</strong>(folder_id:, option:, value:)  &#x21d2; Object </a>
+      <a href="#set_folder_option-instance_method" title="#set_folder_option (instance method)">#<strong>set_folder_option</strong>(folder_id:, option:, value:)  &#x21d2; Hash </a>
     
 
     
@@ -298,7 +320,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>}.</p>
+<p>Sets the options for a specific folder.</p>
 </div></span>
   
 </li>
@@ -307,7 +329,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#upload_file-instance_method" title="#upload_file (instance method)">#<strong>upload_file</strong>(file:, folder_id: nil)  &#x21d2; Object </a>
+      <a href="#upload_file-instance_method" title="#upload_file (instance method)">#<strong>upload_file</strong>(file:, folder_id: nil)  &#x21d2; Hash </a>
     
 
     
@@ -346,13 +368,53 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns a new instance of GFClient.</p>
+<p>Creates a new instance of the GFClient class.</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>token</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The API token for your GoFile account</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>guest</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A boolean value indicating whether or not guest mode should be enabled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -360,6 +422,9 @@
       <pre class="lines">
 
 
+11
+12
+13
 14
 15
 16
@@ -372,15 +437,16 @@
 23
 24
 25
-26
-27</pre>
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>token:</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>guest:</span><span class='kw'>false</span><span class='rparen'>)</span>
   <span class='ivar'>@token</span> <span class='op'>=</span> <span class='id identifier rubyid_token'>token</span>
-  <span class='ivar'>@isGuest</span> <span class='op'>=</span> <span class='id identifier rubyid_guest'>guest</span>
+  <span class='comment'># TODO: Change the name of this parameter! @isGuest is used to check if the user has an account token, not to be confused with *guest accounts*, which have API tokens.
+</span>  <span class='comment'># A GFClient in guest mode (where no token is provided) will set @isGuest to false after acquiring the API key from a newly created guest account, after the user uploads their first file in guest mode.
+</span>  <span class='ivar'>@isGuest</span> <span class='op'>=</span> <span class='id identifier rubyid_guest'>guest</span>
   <span class='ivar'>@accDetails</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='comment'># Gets set after a guest account uploads their first file
 </span>  <span class='comment'># Is used only when uploading files as a guest
@@ -390,7 +456,7 @@
 </span>  <span class='ivar'>@isGuest</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='op'>!</span><span class='ivar'>@token</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@isGuest</span>
   <span class='comment'># If user tries inputting a token while also enabling guest mode, switch guest mode off
 </span>  <span class='ivar'>@isGuest</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='ivar'>@token</span>
-  <span class='id identifier rubyid_test_token_validity'>test_token_validity</span> <span class='kw'>unless</span> <span class='ivar'>@isGuest</span>
+  <span class='id identifier rubyid_get_account_details'>get_account_details</span> <span class='kw'>unless</span> <span class='ivar'>@isGuest</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -407,7 +473,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="copy_content-instance_method">
   
-    #<strong>copy_content</strong>(destination_id:, contents_id:)  &#x21d2; <tt>Object</tt> 
+    #<strong>copy_content</strong>(destination_id:, contents_id:)  &#x21d2; <tt>Hash</tt> 
   
 
   
@@ -416,13 +482,75 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>}</p>
+<p>Copies one or multiple contents to destination folder.</p>
+
+<p>Destination ID: String</p>
+
+<p>Contents ID: String A string of comma separated content ID’s. (“id1,id2,id3”) Response example:</p>
+
+<pre class="code ruby"><code class="ruby">&quot;status&quot;: &quot;ok&quot;,
+&quot;data&quot;: {}
+</code></pre>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>destination_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The ID for the folder where the contents will be copied to.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>contents_id:</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A string of comma separated content ID’s. (“id1,id2,id3”)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response The response object.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -430,23 +558,23 @@
       <pre class="lines">
 
 
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210</pre>
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 220</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_copy_content'>copy_content</span><span class='lparen'>(</span><span class='label'>destination_id:</span><span class='comma'>,</span> <span class='label'>contents_id:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_copy_url'>copy_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api.gofile.io/copyContent</span><span class='tstring_end'>&quot;</span></span>
@@ -470,7 +598,7 @@
       <div class="method_details ">
   <h3 class="signature " id="create_folder-instance_method">
   
-    #<strong>create_folder</strong>(parent_id: nil, folder_name:)  &#x21d2; <tt>Object</tt> 
+    #<strong>create_folder</strong>(parent_id: nil, folder_name:)  &#x21d2; <tt>Hash</tt> 
   
 
   
@@ -479,13 +607,79 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>}</p>
+<p>Creates a folder with the given folder name and parent ID. If a parent ID is not provided, it default to the root folder.</p>
+
+<p>When using guest mode, you cannot call this method until you’ve uploaded a file first, as the guest token and root folder ID won’t be available.</p>
+
+<p>Example response:</p>
+
+<pre class="code ruby"><code class="ruby">&quot;status&quot;: &quot;ok&quot;,
+&quot;data&quot;: {
+
+}
+</code></pre>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>parent_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The ID of the parent folder</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>folder_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the folder that will be created</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response The response object.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -493,25 +687,25 @@
       <pre class="lines">
 
 
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99</pre>
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_folder'>create_folder</span><span class='lparen'>(</span><span class='label'>parent_id:</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='label'>folder_name:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cannot create folders in guest mode! Did you mean to upload a file instead?</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@isGuest</span>
@@ -537,7 +731,7 @@
       <div class="method_details ">
   <h3 class="signature " id="delete_content-instance_method">
   
-    #<strong>delete_content</strong>(contents_id:)  &#x21d2; <tt>Object</tt> 
+    #<strong>delete_content</strong>(contents_id:)  &#x21d2; <tt>Hash</tt> 
   
 
   
@@ -546,13 +740,57 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>}</p>
+<p>Delete one or multiple contents.</p>
+
+<p>Response example:</p>
+
+<pre class="code ruby"><code class="ruby">&quot;status&quot;: &quot;ok&quot;,
+&quot;data&quot;: {}
+</code></pre>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>contents_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A string of comma separated content ID’s. (“id1,id2,id3”)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response The response object.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -560,22 +798,22 @@
       <pre class="lines">
 
 
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229
-230
-231
-232</pre>
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 220</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 242</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_content'>delete_content</span><span class='lparen'>(</span><span class='label'>contents_id:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_delete_url'>delete_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api.gofile.io/deleteContent</span><span class='tstring_end'>&quot;</span></span>
@@ -596,9 +834,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="get_children-instance_method">
+  <h3 class="signature " id="get_account_details-instance_method">
   
-    #<strong>get_children</strong>(parent: nil)  &#x21d2; <tt>Object</tt> 
+    #<strong>get_account_details</strong>  &#x21d2; <tt>Hash</tt> 
   
 
   
@@ -607,13 +845,109 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>ONLY PREMIUM ACCOUNTS CAN USE THIS METHOD!</p>
+<p>Will return the details of the current account.</p>
 
-<p>Gets the children of a specific folder</p>
+<p>Response example:</p>
 
-<p>Defaults to root folder if parent is not provided</p>
+<pre class="code ruby"><code class="ruby">&quot;status&quot;: &quot;ok&quot;,
+&quot;data&quot;: {
+  &quot;token&quot;: &quot;ivlW1ZSGn2Y4AoADbCHUjllj2cO9m3WM&quot;,
+  &quot;email&quot;: &quot;email@domain.tld&quot;,
+  &quot;tier&quot;: &quot;standard&quot;,
+  &quot;rootFolder&quot;: &quot;2aecea58-84e6-420d-b2b9-68b4add8418d&quot;,
+  &quot;foldersCount&quot;: 4,
+  &quot;filesCount&quot;: 20,
+  &quot;totalSize&quot;: 67653500,
+  &quot;totalDownloadCount&quot;: 1
+}
+</code></pre>
 
-<p>Response example: {</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response The response object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+271
+272
+273
+274
+275
+276
+277</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 271</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_account_details'>get_account_details</span>
+  <span class='id identifier rubyid_account_details_url'>account_details_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api.gofile.io/getAccountDetails?token=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@token</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_details'>details</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="HTTPHelper.html" title="HTTPHelper (class)">HTTPHelper</a></span></span><span class='period'>.</span><span class='id identifier rubyid_get'><span class='object_link'><a href="HTTPHelper.html#get-class_method" title="HTTPHelper.get (method)">get</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_account_details_url'>account_details_url</span><span class='rparen'>)</span>   
+  <span class='ivar'>@accDetails</span> <span class='op'>=</span> <span class='id identifier rubyid_details'>details</span>
+
+  <span class='id identifier rubyid_details'>details</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_children-instance_method">
+  
+    #<strong>get_children</strong>(parent_id: nil)  &#x21d2; <tt>Hash</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>This method will be tested at a later time due to it being a premium-only endpoint.</p>
+</div>
+  </div>
+
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>This method is premium only! You will not be able to use it unless you have a premium account!</p>
+</div>
+  </div>
+
+
+<p>Gets the children of a specific folder.</p>
+
+<p>Defaults to root folder if a parent ID is not provided.</p>
+
+<p>Response example:</p>
 
 <pre class="code ruby"><code class="ruby">&quot;status&quot;: &quot;ok&quot;,
 &quot;data&quot;: {
@@ -649,13 +983,51 @@
 }
 </code></pre>
 
-<p>}</p>
-
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>parent_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The ID of the parent folder.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response The response object.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -663,20 +1035,20 @@
       <pre class="lines">
 
 
-142
-143
-144
-145
-146
-147
-148
-149
-150</pre>
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 162</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_get_children'>get_children</span><span class='lparen'>(</span><span class='label'>parent:</span><span class='kw'>nil</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_get_children'>get_children</span><span class='lparen'>(</span><span class='label'>parent_id:</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Guests cannot use the #get_children method!</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='ivar'>@isGuest</span>
   <span class='id identifier rubyid_parent'>parent</span> <span class='op'>=</span> <span class='ivar'>@accDetails</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>data</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rootFolder</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_parent'>parent</span>
 
@@ -693,7 +1065,7 @@
       <div class="method_details ">
   <h3 class="signature " id="get_server-instance_method">
   
-    #<strong>get_server</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>get_server</strong>  &#x21d2; <tt>Hash</tt> 
   
 
   
@@ -704,7 +1076,7 @@
     
 <p>Retreives the best available server for uploading files</p>
 
-<p>Example response: {</p>
+<p>Example response:</p>
 
 <pre class="code ruby"><code class="ruby">&quot;status&quot;: &quot;ok&quot;,
 &quot;data&quot;: {
@@ -712,13 +1084,29 @@
 }
 </code></pre>
 
-<p>}</p>
-
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response The response object.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -726,13 +1114,13 @@
       <pre class="lines">
 
 
+38
 39
 40
-41
-42</pre>
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_server'>get_server</span>
   <span class='id identifier rubyid_server_url'>server_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api.gofile.io/getServer</span><span class='tstring_end'>&quot;</span></span>
@@ -746,7 +1134,7 @@
       <div class="method_details ">
   <h3 class="signature " id="set_folder_option-instance_method">
   
-    #<strong>set_folder_option</strong>(folder_id:, option:, value:)  &#x21d2; <tt>Object</tt> 
+    #<strong>set_folder_option</strong>(folder_id:, option:, value:)  &#x21d2; <tt>Hash</tt> 
   
 
   
@@ -755,13 +1143,101 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>}</p>
+<p>Sets the options for a specific folder.</p>
+
+<p>The expected option and value types are listed below.</p>
+
+<p>public: Boolean</p>
+
+<p>password: String</p>
+
+<p>description: String</p>
+
+<p>expire: Unix Timestamp</p>
+
+<p>tags: String (String of comma separated tags, Eg. “tag1,tag2,tag3”)</p>
+
+<p>Response example:</p>
+
+<pre class="code ruby"><code class="ruby">&quot;status&quot;: &quot;ok&quot;,
+&quot;data&quot;: {}
+</code></pre>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>folder_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The ID of the target folder.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>option</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The option that you wish to set. Can be “public”, “password”, “description”, “expire” or “tags”</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The matching value for the option parameter</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response The response object.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -769,23 +1245,23 @@
       <pre class="lines">
 
 
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183</pre>
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 170</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 193</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set_folder_option'>set_folder_option</span><span class='lparen'>(</span><span class='label'>folder_id:</span><span class='comma'>,</span> <span class='label'>option:</span><span class='comma'>,</span> <span class='label'>value:</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options_url'>options_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>https://api.gofile.io/setFolderOption</span><span class='tstring_end'>&quot;</span></span>
@@ -809,7 +1285,7 @@
       <div class="method_details ">
   <h3 class="signature " id="upload_file-instance_method">
   
-    #<strong>upload_file</strong>(file:, folder_id: nil)  &#x21d2; <tt>Object</tt> 
+    #<strong>upload_file</strong>(file:, folder_id: nil)  &#x21d2; <tt>Hash</tt> 
   
 
   
@@ -818,7 +1294,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Uploads a file to the given destination folder</p>
+<p>Uploads a file to the given destination folder.</p>
 
 <p>If using guest mode, you cannot specify a folder ID when uploading your first file.</p>
 
@@ -828,11 +1304,81 @@
 
 <p>This means that you can call the #upload_file method multiple times without having to deal with authentication.</p>
 
+<p>Example response:</p>
+
+<pre class="code ruby"><code class="ruby">&quot;status&quot;: &quot;ok&quot;,
+ &quot;data&quot;: {
+   &quot;guestToken&quot;: &quot;a939kv5b43c03192imatoken2949&quot;
+   &quot;downloadPage&quot;: &quot;https://gofile.io/d/Z19n9a&quot;,
+   &quot;code&quot;: &quot;Z19n9a&quot;,
+   &quot;parentFolder&quot;: &quot;3dbc2f87-4c1e-4a81-badc-af004e61a5b4&quot;,
+   &quot;fileId&quot;: &quot;4991e6d7-5217-46ae-af3d-c9174adae924&quot;,
+   &quot;fileName&quot;: &quot;example.mp4&quot;,
+   &quot;md5&quot;: &quot;10c918b1d01aea85864ee65d9e0c2305&quot;
+ }
+</code></pre>
+
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The file that will be uploaded to GoFile</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>folder_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The ID for the parent folder. Will default to the root folder if none is provided.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>response The response object.</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><table class="source_code">
   <tr>
@@ -840,29 +1386,32 @@
       <pre class="lines">
 
 
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
 67
 68
 69
 70
 71
-72</pre>
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/gofile_ruby.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload_file'>upload_file</span><span class='lparen'>(</span><span class='label'>file:</span><span class='comma'>,</span> <span class='label'>folder_id:</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Guests cannot specify folder ID before their first upload!</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_folder_id'>folder_id</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@guestUploadDestination</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -873,9 +1422,12 @@
   <span class='id identifier rubyid_body'>body</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>file</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_file'>file</span><span class='rbracket'>]</span><span class='rbracket'>]</span>
   <span class='id identifier rubyid_body'>body</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>token</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@token</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='op'>!</span><span class='ivar'>@isGuest</span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_folder_id'>folder_id</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@isGuest</span>
-    <span class='id identifier rubyid_body'>body</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folderId</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_folder_id'>folder_id</span><span class='rbracket'>]</span>
-  <span class='kw'>elsif</span> <span class='ivar'>@guestUploadDestination</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_folder_id'>folder_id</span>
+  <span class='comment'># If user inputs a folder_id while they aren&#39;t in guest mode,
+</span>  <span class='kw'>if</span> <span class='id identifier rubyid_folder_id'>folder_id</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@isGuest</span>
+    <span class='comment'># add the ID to the body of the request
+</span>    <span class='id identifier rubyid_body'>body</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folderId</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_folder_id'>folder_id</span><span class='rbracket'>]</span>
+  <span class='comment'># If the user is on a guest account, and a folder id hasn&#39;t been provided, use the folder ID returned from the first file upload
+</span>  <span class='kw'>elsif</span> <span class='ivar'>@guestUploadDestination</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_folder_id'>folder_id</span>
     <span class='id identifier rubyid_body'>body</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>folderId</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@guestUploadDestination</span><span class='rbracket'>]</span>
   <span class='kw'>end</span>
 
@@ -894,7 +1446,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Mar  3 02:42:45 2023 by
+  Generated on Fri Mar  3 04:07:49 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-3.2.1).
 </div>

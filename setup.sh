@@ -13,11 +13,11 @@ gem build gofile_ruby.gemspec
 echo -e "\n${GREEN}[OK]${NC} BUILD COMPLETE\n"
 
 # Only find first match (gem file with highest version number)
-gemfile_dir=$(find . -maxdepth 1 -name "*gofile_ruby-*" | head -n 1)
+gemfile_dir=$(find . -maxdepth 1 -name "*gofile_ruby-*" | sort -n -r | head -n 1)
 
 if [[ -n $gemfile_dir ]];
 then
-    echo -e "\n${BLUE}[INFO]${NC} INSTALLING GEM"
+    echo -e "\n${LBLUE}[INFO]${NC} INSTALLING GEM\n"
     gem install $gemfile_dir
 else
     echo -e "\n${RED}[ERROR]${NC} GEMFILE NOT FOUND! PLEASE ENSURE THE GOFILE_RUBY .gem FILE EXISTS IN ROOT DIRECTORY!\n"

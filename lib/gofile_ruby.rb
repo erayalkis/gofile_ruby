@@ -282,9 +282,9 @@ class GFClient
   def save_guest_acc_details(uploadResponse)
     # If user is a guest,
     # After uploading, take the newly returned guest token
-    guest_token = ret["data"]["guestToken"]
+    guest_token = uploadResponse["data"]["guestToken"]
     # And the newly created root folder,
-    new_root_folder = ret["data"]["parentFolder"]
+    new_root_folder = uploadResponse["data"]["parentFolder"]
     @isGuest = false
     @guestUploadDestination = new_root_folder
     @token = guest_token
