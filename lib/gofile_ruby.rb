@@ -1,28 +1,25 @@
-require './lib/helpers/http/http_helper.rb'
+require './lib/gofile_ruby/http_helper.rb'
 
 # A wrapper for the GoFile API, containing methods for each available endpoint.
 #
 # @see https://gofile.io/api
 class GFClient
 
+  attr_reader :get_account_details
   # Creates a new instance of the GFClient class.
   # @param [String] token The API token for your GoFile account
   # @param [Boolean] guest A boolean value indicating whether or not guest mode should be enabled
   def initialize(token:nil, guest:false)
     @token = token
-    # TODO: Change the name of this parameter! @isGuest is used to check if the user has an account token, not to be confused with *guest accounts*, which have API tokens.
-    # A GFClient in guest mode (where no token is provided) will set @isGuest to false after acquiring the API key from a newly created guest account, after the user uploads their first file in guest mode.
-    @isGuest = guest
-    @accDetails = nil
+    # A GFClient in guest mode (where no token is provided) will set @has_token to true after acquiring the API key from a newly created guest account after the user uploads their first file in guest mode.
+    @has_token = !@token.nil?
+    @is_guest = guest
+
+    @account_details = nil
     # Gets set after a guest account uploads their first file
     # Is used only when uploading files as a guest
-    @guestUploadDestination = nil
-
-    # Automatically set guest mode if user doesn't provide any input
-    @isGuest = true if !@token && !@isGuest
-    # If user tries inputting a token while also enabling guest mode, switch guest mode off
-    @isGuest = false if @token
-    get_account_details unless @isGuest
+    @guest_upload_destination = nil
+    validate_guest_mode
   end
 
   # Retreives the best available server for uploading files
@@ -65,25 +62,25 @@ class GFClient
   # @param [String] folder_id The ID for the parent folder. Will default to the root folder if none is provided.
   # @return [Hash] response The response object.
   def upload_file(file:, folder_id: nil)
-    raise "Guests cannot specify folder ID before their first upload!" if folder_id && @guestUploadDestination.nil?
+    raise "Guests cannot specify folder ID before their first upload!" if folder_id && @is_guest
 
     best_server = get_server()["data"]["server"]
     upload_url = "https://#{best_server}.gofile.io/uploadFile"
 
     body = [["file", file]]
-    body << ["token", @token] if !@isGuest
+    body << ["token", @token] if @has_token
 
-    # If user inputs a folder_id while they aren't in guest mode,
-    if folder_id && !@isGuest
+    # If user inputs a folder_id while they have a token
+    if folder_id && @has_token
       # add the ID to the body of the request
       body << ["folderId", folder_id]
-    # If the user is on a guest account, and a folder id hasn't been provided, use the folder ID returned from the first file upload
-    elsif @guestUploadDestination && !folder_id
-      body << ["folderId", @guestUploadDestination]
+    # If the user has uploaded a file as a guest, and a folder id hasn't been provided, use the folder ID returned from the first file upload
+    elsif @guest_upload_destination && !folder_id
+      body << ["folderId", @guest_upload_destination]
     end
   
     ret = HTTPHelper.post_multipart_data(upload_url, body)
-    save_guest_acc_details(ret) if @isGuest
+    save_guest_acc_details(ret) if @has_token
   
     ret
   end
@@ -102,10 +99,11 @@ class GFClient
   # @param [String] folder_name The name of the folder that will be created
   # @return [Hash] response The response object.
   def create_folder(parent_id:nil, folder_name:)
-    raise "Cannot create folders in guest mode! Did you mean to upload a file instead?" if @isGuest
+    raise "Cannot create folders without a token! Please upload a file first!" if !@has_token
+
     post_folder_url = "https://api.gofile.io/createFolder"
     
-    parent_id = @accDetails["data"]["rootFolder"] unless parent_id
+    parent_id = @account_details["data"]["rootFolder"] unless parent_id
     folder_data = {
       "parentFolderId" => parent_id,
       "folderName" => folder_name,
@@ -159,8 +157,9 @@ class GFClient
   # @note This method is premium only! You will not be able to use it unless you have a premium account!
   # @todo This method will be tested at a later time due to it being a premium-only endpoint.
   def get_children(parent_id:nil)
-    raise "Guests cannot use the #get_children method!" if @isGuest
-    parent = @accDetails["data"]["rootFolder"] if !parent
+    raise "Cannot use the #get_children method without a token!" if !@has_token
+
+    parent = @account_details["data"]["rootFolder"] if !parent
 
     content_url = "https://api.gofile.io/getContent?contentId=#{parent}&token=#{@token}"
     ret = HTTPHelper.get(content_url)
@@ -269,9 +268,22 @@ class GFClient
   def get_account_details
     account_details_url = "https://api.gofile.io/getAccountDetails?token=#{@token}"
     details = HTTPHelper.get(account_details_url)   
-    @accDetails = details
 
     details
+  end
+
+  # Calls the #get_account_details method and saves it to the @account_details instance variable
+  #
+  # Response is same as #get_account_details method
+  #
+  # @return [Hash] response The response object.
+  def authenticate
+    acc_deatils = get_account_details
+    @acc_deatils = acc_deatils
+  end
+
+  def is_guest?
+    @is_guest
   end
 
   private
@@ -283,10 +295,22 @@ class GFClient
     guest_token = uploadResponse["data"]["guestToken"]
     # And the newly created root folder,
     new_root_folder = uploadResponse["data"]["parentFolder"]
-    @isGuest = false
-    @guestUploadDestination = new_root_folder
+    @has_token = false
+    @guest_upload_destination = new_root_folder
     @token = guest_token
-    # And check the tokens validity, saving the users details into @accDetails afterwards
+    # And check the tokens validity, saving the users details into @account_details afterwards
     get_account_details
+  end
+
+  def validate_guest_mode
+    # Automatically set guest mode if user doesn't provide any input
+    if !@has_token && !@is_guest
+      @is_guest = true
+    end
+    # If user tries inputting a token while also enabling guest mode, switch guest mode off
+    if @has_token && @is_guest
+      @token = nil
+      @has_token = false
+    end
   end
 end
