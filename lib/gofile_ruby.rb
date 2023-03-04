@@ -5,20 +5,27 @@ require './lib/gofile_ruby/http_helper.rb'
 # @see https://gofile.io/api
 class GFClient
 
-  attr_reader :get_account_details
+  attr_reader :account_details
   # Creates a new instance of the GFClient class.
   # @param [String] token The API token for your GoFile account
   # @param [Boolean] guest A boolean value indicating whether or not guest mode should be enabled
   def initialize(token:nil, guest:false)
+    # The GoFile API token, defaults to nil if none is provided.
     @token = token
-    # A GFClient in guest mode (where no token is provided) will set @has_token to true after acquiring the API key from a newly created guest account after the user uploads their first file in guest mode.
+    # A GFClient instance that is in guest mode (where no token is provided) will set @has_token to false, and @is_guest to true. 
+    # The @has_token instance variable will be set to true after the user acquires a guest account token by uploading a file in guest mode.
     @has_token = !@token.nil?
+    # Instance variable for tracking if the client is using a guest account or not
     @is_guest = guest
 
+    # Account details, initially set to `nil` until the user calls the `#authenticate` method
     @account_details = nil
-    # Gets set after a guest account uploads their first file
-    # Is used only when uploading files as a guest
+
+    # The root folder returned by the `#upload_file` method when called in guest mode (without a token).
+    # Gets set after a guest account uploads their first file.
+    # Is used only when uploading files as a guest.
     @guest_upload_destination = nil
+    # Final checks to ensure the user doesn't try anything odd. (Eg. passing in a token while also setting guest mode to true)
     validate_guest_mode
   end
 
@@ -99,7 +106,8 @@ class GFClient
   # @param [String] folder_name The name of the folder that will be created
   # @return [Hash] response The response object.
   def create_folder(parent_id:nil, folder_name:)
-    raise "Cannot create folders without a token! Please upload a file first!" if !@has_token
+    raise "Cannot create folders without a token! Please upload a file first!" unless @has_token
+    raise "Cannot use root folder without authenticating first" unless @account_details
 
     post_folder_url = "https://api.gofile.io/createFolder"
     
@@ -279,7 +287,7 @@ class GFClient
   # @return [Hash] response The response object.
   def authenticate
     acc_deatils = get_account_details
-    @acc_deatils = acc_deatils
+    @account_details = acc_deatils
   end
 
   def is_guest?
