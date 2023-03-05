@@ -24,7 +24,6 @@ module HTTPHelper
   # @param [String, URI] url The URL for the request.
   # @param [Hash] data The data for the post request.
   def self.post_form(url, data)
-    raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic
 
     res = Net::HTTP.post_form(url, data)
@@ -41,7 +40,6 @@ module HTTPHelper
   # @param [String, URI] url The URL for the request.
   # @param [Array<Array<String, T>>] data The data for the post request.
   def self.post_multipart_data(url, data)
-    raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic
 
     http = Net::HTTP.new(url.host, url.port)
@@ -63,7 +61,6 @@ module HTTPHelper
   # @param [String, URI] url The URL for the request.
   # @param [Array<Array<String, T>>] data The data for the post request.
   def self.put(url, data)
-    raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic
 
     http = Net::HTTP.new(url.host, url.port)
@@ -85,7 +82,6 @@ module HTTPHelper
   # @param [String, URI] url The URL for the request.
   # @param [Array<Array<String, T>>] data The data for the post request.
   def self.delete(url, data)
-    raise "No form data provided!" unless data
     url = URI(url) unless url.class == URI::Generic
 
     http = Net::HTTP.new(url.host, url.port)
