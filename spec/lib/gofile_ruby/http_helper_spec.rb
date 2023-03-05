@@ -1,6 +1,12 @@
 require './lib/gofile_ruby/http_helper.rb'
 
 describe HTTPHelper do
+    # Wait 1 second before each test to avoid triggering the rate limiter
+    # In the future, as the amount of tests will grow, this can be applied only to specific tests to avoid waiting minutes for the tests to finish running
+    before(:each) do
+        sleep 1
+    end
+
     describe ".get" do
         it "should throw an error with invalid URL's" do
             expect { HTTPHelper.get("hppts://www.httpbin.org/get") }.to raise_error(ArgumentError)
@@ -35,7 +41,7 @@ describe HTTPHelper do
         end
 
         it "should successfully make a post request" do
-            expect { HTTPHelper.post_multipart_data("https://www.httpbin.org/post") }.not_to raise_error
+            expect { HTTPHelper.post_multipart_data("https://www.httpbin.org/post", [['data', 'hello']]) }.not_to raise_error
         end
     end
 
@@ -49,7 +55,7 @@ describe HTTPHelper do
         end
 
         it "should successfully make a put request" do
-            expect { HTTPHelper.put("https://www.httpbin.org/put") }.not_to raise_error
+            expect { HTTPHelper.put("https://www.httpbin.org/put", { data: "Hello" }) }.not_to raise_error
 
         end
     end
