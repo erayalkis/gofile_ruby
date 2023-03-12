@@ -57,7 +57,7 @@ class GFClient
   # Example response:
   #  "status": "ok",
   #   "data": {
-  #     "guestToken": "a939kv5b43c03192imatoken2949"
+  #     "guestToken": "a939kv5b43c03192imatoken2949" (If uploaded without a token)
   #     "downloadPage": "https://gofile.io/d/Z19n9a",
   #     "code": "Z19n9a",
   #     "parentFolder": "3dbc2f87-4c1e-4a81-badc-af004e61a5b4",
@@ -224,7 +224,7 @@ class GFClient
   # @return [Hash] response The response object.
   # @note This method is premium only! You will not be able to use it unless you have a premium account!
   # @todo This method will be tested at a later time due to it being a premium-only endpoint.
-  def copy_content(destination_id:, contents_id:)
+  def copy_content(contents_id:, destination_id:)
     copy_url = "https://api.gofile.io/copyContent"
 
     body = {
