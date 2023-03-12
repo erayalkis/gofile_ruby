@@ -16,10 +16,10 @@
     <a href="https://github.com/erayalkis/gofile_ruby/issues">Request Feature</a>
   </p>
 
+# About gofile_ruby:
 `gofile_ruby` is a simple, zero-dependency, developer friendly wrapper for the [GoFile API](https://gofile.io/api).
 
-## gofile_ruby features:
-
+## Features:
 - Logging into an account with an API token.
 - Retrieving a folder/file. *
 - Updating folder/file details.
