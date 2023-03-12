@@ -152,4 +152,4 @@ Check out the [documentation]() for more details.
 
 # License
 
-Licensed under the [MIT License](https://github.com/erayalkis/gofile_ruby/blob/main/LICENSE)
+Licensed under the [MIT License](https://erayalkis.github.io/gofile_ruby/)
