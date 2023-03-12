@@ -210,6 +210,18 @@ class GFClient
     ret
   end
 
+  # Helper function for { GFClient#set_folder_option }
+  #
+  # @param [String] folder_id The ID of the target folder.
+  # @param [Hash] options_hash A Hash containing options and values as key-value pairs.
+  # @yield [Hash] response The response object for each option-value pair.
+  def set_options_hash(folder_id:, options_hash:, &block)
+    options_hash.each do |k, v|
+      res = set_folder_option(folder_id: folder_id, option: k, value: v)
+      yield res
+    end
+  end
+
   # Copies one or multiple contents to destination folder.
   #
   # Destination ID: String
