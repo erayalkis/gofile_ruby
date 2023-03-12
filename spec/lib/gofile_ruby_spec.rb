@@ -90,7 +90,6 @@ describe GFClient do
             first_folder = gf.create_folder(folder_name: "folder-one")
             second_folder = gf.create_folder(folder_name: "folder-two", parent_id: first_folder["data"]["id"])
 
-            puts first_folder
             expect(first_folder["status"]).to eq "ok"
             expect(second_folder["status"]).to eq "ok"
             expect(second_folder["data"]["parentFolder"]).to eq first_folder["data"]["id"]
