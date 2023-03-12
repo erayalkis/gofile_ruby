@@ -2,20 +2,20 @@
     <img width="33%" src="./logo.png">
 </p>
 
-  <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
-  </p>
-
 <h1 align="center">gofile_ruby</h1>
+
+
+  <p align="center">
+    A Ruby wrapper for the GoFile API.
+    <br />
+    <a href="https://erayalkis.github.io/gofile_ruby"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    ·
+    <a href="https://github.com/erayalkis/gofile_ruby/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/erayalkis/gofile_ruby/issues">Request Feature</a>
+  </p>
 
 `gofile_ruby` is a simple, zero-dependency, developer friendly wrapper for the [GoFile API](https://gofile.io/api).
 
