@@ -17,14 +17,22 @@ GoFile Ruby supports:
 > For this reason, testing for the aforementioned endpoints is minimal, and they might be unstable.
 > If you wish to help this project improve, you can start by opening an issue [here](https://github.com/erayalkis/gofile_ruby/issues/new).
 
-# Usage
+# Quick Start
 
-This is a usage description. Tell the users the behavior of the gem and how the flow is, along with any intricacies (such as the wrapper not raising errors and just returning error responses)
+## Installation
 
-# Installation
+To install the latest release:
 
-Tell the users how they can get the gem set up locally for development.
+```
 
-# Licensing(?)
+gem install gofile_ruby
+```
 
-Maybe add a licensing section here :)
+## Usage
+
+
+
+# License
+
+
+
