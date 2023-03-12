@@ -37,11 +37,14 @@ Logging in and receiving a token with a guest account:
     # ... (unrelated code)
 
     # Creates a GFClient in guest mode with @has_token set to false
-    # You can omit the `guest` argument when creating a GFClient instance, as it defaults to a guest account when no token is provided
+    # You can omit the `guest` argument when creating a GFClient instance, 
+        # as it defaults to a guest account when no token is provided
     client = GFClient.new(guest: true)
 
-    # The GFClient instance is now in guest mode, and will require you to upload a file before you can access most other endpoints.
-    # This is because guest accounts do not get their token until they upload a file, and most endpoints require a token.
+    # The GFClient instance is now in guest mode,
+        # and will require you to upload a file before you can access most other endpoints.
+    # This is because guest accounts do not get their token until they upload a file, 
+        # and most endpoints require a token.
     file = File.open('./path/to/file')
 
     # `res` will now contain a `guestToken` property.
