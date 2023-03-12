@@ -61,7 +61,7 @@ Logging in with an API token:
 ```ruby
     require 'gofile_ruby'
 
-    # ... (unrelated code)
+    # ...
 
     client = GFClient.new(token: 'randomapitoken123456789')
 ```
@@ -70,7 +70,7 @@ Uploading a file:
 ```ruby
     require 'gofile_ruby'
     
-    # ... (unrelated code)
+    # ...
 
     # Creates a guest account
     client = GFClient.new
@@ -85,7 +85,7 @@ Setting folder properties:
 ```ruby
     require 'gofile_ruby'
     
-    # ... (unrelated code)
+    # ...
 
     client = GFClient.new(token: 'randomapitoken123456789')
 
@@ -103,7 +103,7 @@ Deleting content:
 ```ruby
     require 'gofile_ruby'
     
-    # ... (unrelated code)
+    # ...
 
     client = GFClient.new(token: 'randomapitoken123456789')
 
@@ -121,7 +121,7 @@ Retrieving children:
 ```ruby
     require 'gofile_ruby'
     
-    # ... (unrelated code)
+    # ...
 
     client = GFClient.new(token: 'randomapitoken123456789')
     
@@ -134,7 +134,7 @@ Copying content:
 ```ruby
     require 'gofile_ruby'
     
-    # ... (unrelated code)
+    # ...
 
     client = GFClient.new(token: 'randomapitoken123456789')
     
