@@ -1,8 +1,12 @@
-# gofile_ruby
+<p align="center" width="100%">
+    <img width="33%" src="./logo.png">
+</p>
+
+<h1 align="center">gofile_ruby</h1>
 
 `gofile_ruby` is a simple, zero-dependency, developer friendly wrapper for the [GoFile API](https://gofile.io/api).
 
-GoFile Ruby supports:
+## GoFile Ruby supports:
 
 - Logging into an account with an API token.
 - Retrieving a folder/file. *
