@@ -148,8 +148,8 @@ Copying content:
     res = client.copy_content(contents_id: contents, destination_id: destination)
 ```
 
-Check out the [documentation]() for more details.
+Check out the [documentation](https://erayalkis.github.io/gofile_ruby/) for more details.
 
 # License
 
-Licensed under the [MIT License](https://erayalkis.github.io/gofile_ruby/)
+Licensed under the [MIT License](https://github.com/erayalkis/gofile_ruby/blob/main/LICENSE)
