@@ -163,6 +163,42 @@ describe GFClient do
 
             expect(res["status"]).to eq "ok"
         end
+
+        describe "set_options_hash" do
+            it "should raise an error when any of the arguments are missing" do
+                gf = GFClient.new
+
+                expect { gf.set_options_hash(folder_id: "testid123") }.to raise_error(ArgumentError)
+                expect { gf.set_options_hash(options_hash: { "password": "123", "expiry": 9999999999 }) }.to raise_error(ArgumentError)
+            end
+
+            it "should raise an error when an invalid option is given" do
+                gf = GFClient.new(token: token)
+                gf.authenticate
+
+                options_hash = {
+                    "nonexistentsetting": "12345",
+                }
+
+                dummy_folder_id = gf.create_folder(folder_name: "Test Folder")["data"]["id"]
+                gf.set_options_hash(folder_id: dummy_folder_id, options_hash: options_hash) { |res| expect(res["status"]).to eq "error-noOption" }
+            end
+
+            it "should successfully set all given options" do
+                gf = GFClient.new(token: token)
+                
+                gf.authenticate
+
+                options_hash = {
+                    "password": "12345",
+                    "description": "test description"
+                }
+
+                dummy_folder_id = gf.create_folder(folder_name: "Test Folder")["data"]["id"]
+
+                gf.set_options_hash(folder_id: dummy_folder_id, options_hash: options_hash) { |res| expect(res["status"]).to eq "ok" }
+            end
+        end
     end
 
     describe "#upload_file" do
