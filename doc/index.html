@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'><p align="center" width="100%">
+    <img width="33%" src="./logo.png" />
+</p>
+
+<h1 align="center">gofile_ruby</h1>
+
+<p><code>gofile_ruby</code> is a simple, zero-dependency, developer friendly wrapper for the <a href="https://gofile.io/api">GoFile API</a>.</p>
+
+<h2 id="gofile-ruby-supports">GoFile Ruby supports:</h2>
+
+<ul>
+  <li>Logging into an account with an API token.</li>
+  <li>Retrieving a folder/file. *</li>
+  <li>Updating folder/file details.</li>
+  <li>Copying files/folders across folders. *</li>
+  <li>Uploading files.</li>
+  <li>Deleting files.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Warning</strong></p>
+
+  <p>The endpoints for retrieving content details and copying content is only available to users with a GoFile Premium account.
+For this reason, testing for the aforementioned endpoints is minimal, and they might be unstable.
+If you wish to help this project improve, you can start by opening an issue <a href="https://github.com/erayalkis/gofile_ruby/issues/new">here</a>.</p>
+</blockquote>
+
+<h1 id="quick-start">Quick Start</h1>
+
+<h2 id="installation">Installation</h2>
+
+<p>To install the latest release:</p>
+
+<p>```</p>
+
+<p>gem install gofile_ruby
+```</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>Logging in and receiving a token with a guest account:
+```ruby
+    require ‘gofile_ruby’</p>
+
+<pre class="code ruby"><code class="ruby"># ... (unrelated code)
+
+# Creates a GFClient in guest mode with @has_token set to false
+# You can omit the `guest` argument when creating a GFClient instance, 
+    # as it defaults to a guest account when no token is provided
+client = GFClient.new(guest: true)
+
+# The GFClient instance is now in guest mode,
+    # and will require you to upload a file before you can access most other endpoints.
+# This is because guest accounts do not get their token until they upload a file, 
+    # and most endpoints require a token.
+file = File.open(&#39;./path/to/file&#39;)
+
+# `res` will now contain a `guestToken` property.
+# `gofile_ruby` will now save this token and uses it in any further API calls.
+res = client.upload_file(file: file)
+
+file_two = File.open(&#39;./path/to/second/file&#39;)
+
+# This upload call will now use the token retrieved from the first call.
+res = client.upload_file(file: file_two) ```
+</code></pre>
+
+<p>Logging in with an API token:
+```ruby
+    require ‘gofile_ruby’</p>
+
+<pre class="code ruby"><code class="ruby"># ...
+
+client = GFClient.new(token: &#39;randomapitoken123456789&#39;) ```
+</code></pre>
+
+<p>Uploading a file:
+```ruby
+    require ‘gofile_ruby’</p>
+
+<pre class="code ruby"><code class="ruby"># ...
+
+# Creates a guest account
+client = GFClient.new
+
+file = File.open(&quot;./path/to/file&quot;)
+
+# A response object that contains data about the uploaded file (if successful) 
+res = client.upload_file(file: file) ```
+</code></pre>
+
+<p>Setting folder properties:
+```ruby
+    require ‘gofile_ruby’</p>
+
+<pre class="code ruby"><code class="ruby"># ...
+
+client = GFClient.new(token: &#39;randomapitoken123456789&#39;)
+
+folder_id = &#39;examplefolderid&#39;
+
+client.set_folder_option(folder_id: folder_id, option: &#39;public&#39;, value: true)
+client.set_folder_option(folder_id: folder_id, option: &#39;public&#39;, value: false)
+client.set_folder_option(folder_id: folder_id, option: &#39;password&#39;, value: &#39;password123&#39;)
+client.set_folder_option(folder_id: folder_id, option: &#39;description&#39;, value: &#39;I am a description&#39;)
+client.set_folder_option(folder_id: folder_id, option: &#39;expire&#39;, value: 1678647468)
+client.set_folder_option(folder_id: folder_id, option: &#39;tags&#39;, value: &#39;tag1,tag2,tag3,tag4,tag5&#39;) ```
+</code></pre>
+
+<p>Deleting content:
+```ruby
+    require ‘gofile_ruby’</p>
+
+<pre class="code ruby"><code class="ruby"># ...
+
+client = GFClient.new(token: &#39;randomapitoken123456789&#39;)
+
+contents = &#39;contentid1,contentid2,contentid3,contentid4&#39;
+
+res = client.delete_content(contents_id: contents) ```
+</code></pre>
+
+<blockquote>
+  <p><strong>Warning</strong></p>
+
+  <p>The methods shown below are premium only and untested.</p>
+
+</blockquote>
+
+<p>Retrieving children:
+```ruby
+    require ‘gofile_ruby’</p>
+
+<pre class="code ruby"><code class="ruby"># ...
+
+client = GFClient.new(token: &#39;randomapitoken123456789&#39;)
+
+parent_id = &#39;parentid123&#39;
+
+res = client.get_children(parent_id: parent_id) ```
+</code></pre>
+
+<p>Copying content:
+```ruby
+    require ‘gofile_ruby’</p>
+
+<pre class="code ruby"><code class="ruby"># ...
+
+client = GFClient.new(token: &#39;randomapitoken123456789&#39;)
+
+contents = &#39;contentid1,contentid2,contentid3,contentid4&#39;
+destination = &#39;destinationid&#39;
+
+res = client.copy_content(contents_id: contents, destination_id: destination) ```
+</code></pre>
+
+<p>Check out the <a href="">documentation</a> for more details.</p>
+
+<h1 id="license">License</h1>
+
+<p>Licensed under the <a href="https://github.com/erayalkis/gofile_ruby/blob/main/LICENSE">MIT License</a></p>
+</div></div>
+
+      <div id="footer">
+  Generated on Mon Mar 13 01:34:40 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-3.2.1).
+</div>
+
+    </div>
+  </body>
+</html>

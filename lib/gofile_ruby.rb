@@ -5,7 +5,7 @@ require './lib/gofile_ruby/http_helper.rb'
 # @see https://gofile.io/api
 class GFClient
 
-  attr_reader :account_details
+  attr_reader :account_details, :is_guest
   # Creates a new instance of the GFClient class.
   # @param [String] token The API token for your GoFile account
   # @param [Boolean] guest A boolean value indicating whether or not guest mode should be enabled
@@ -210,7 +210,7 @@ class GFClient
     ret
   end
 
-  # Helper function for { GFClient#set_folder_option }
+  # Helper function for #set_folder_option
   #
   # @param [String] folder_id The ID of the target folder.
   # @param [Hash] options_hash A Hash containing options and values as key-value pairs.
@@ -302,6 +302,9 @@ class GFClient
     @account_details = acc_deatils
   end
 
+  # Alias for getter method.
+  #
+  # @return [Boolean] is_guest Boolean value indicating whether current instance is in guest mode or not.
   def is_guest?
     @is_guest
   end
