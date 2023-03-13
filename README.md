@@ -10,7 +10,6 @@
     <a href="https://erayalkis.github.io/gofile_ruby"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    ·
     <a href="https://github.com/erayalkis/gofile_ruby/issues">Report Bug</a>
     ·
     <a href="https://github.com/erayalkis/gofile_ruby/issues">Request Feature</a>
@@ -40,7 +39,6 @@
 To install the latest release:
 
 ```
-
 gem install gofile_ruby
 ```
 
