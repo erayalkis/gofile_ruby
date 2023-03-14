@@ -113,6 +113,25 @@ Setting folder properties:
     client.set_folder_option(folder_id: folder_id, option: 'tags', value: 'tag1,tag2,tag3,tag4,tag5')
 ```
 
+Setting folder properties with a hash:
+```ruby
+    require 'gofile_ruby'
+
+    gf = GFClient.new(token: 'randomapitoken123456789')
+
+    folder_id = 'examplefolderid'
+    options = {
+        password: 'password123',
+        description: 'This is a description'        
+    }
+
+    # The #set_options_hash calls the #set_folder_option for each key-value pair in the options hash
+    gf.set_options_hash(folder_id: folder_id, options: options)
+
+    # To make error catching possible, #set_options_hash accepts a block and yields each response object into it
+    gf.set_options_hash(folder_id: folder_id, options: options) { |res| puts res }
+```
+
 Deleting content:
 ```ruby
     require 'gofile_ruby'
